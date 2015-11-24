@@ -28,7 +28,7 @@ namespace VSCode.FileSystem
             var path = args[0];
             if (!Directory.Exists(path))
             {
-                Console.Error.WriteLine(string.Format("Path '{0}' does not exist.", path));
+                Console.Error.WriteLine("Path '{0}' does not exist.", path);
                 return 1;
             }
 
@@ -36,14 +36,14 @@ namespace VSCode.FileSystem
 
             // Event processor deals with buffering and normalization of events
             var processor = new EventProcessor((e) => {
-                Console.WriteLine(string.Format("{0}|{1}", e.changeType, e.path));
+                Console.WriteLine("{0}|{1}", e.changeType, e.path);
 
                 if (verboseLogging)
                 {
-                    Console.WriteLine(string.Format("{0}| >> normalized {1} {2}", (int)ChangeType.LOG, e.changeType == (int)ChangeType.CREATED ? "[ADDED]" : e.changeType == (int)ChangeType.DELETED ? "[DELETED]" : "[CHANGED]", e.path));
+                    Console.WriteLine("{0}| >> normalized {1} {2}", (int)ChangeType.LOG, e.changeType == (int)ChangeType.CREATED ? "[ADDED]" : e.changeType == (int)ChangeType.DELETED ? "[DELETED]" : "[CHANGED]", e.path);
                 }
             }, (msg) => {
-                Console.WriteLine(string.Format("{0}|{1}", (int)ChangeType.LOG, msg));
+                Console.WriteLine("{0}|{1}", (int)ChangeType.LOG, msg);
             });
 
             // Use a thread to unblock producer
@@ -56,7 +56,7 @@ namespace VSCode.FileSystem
 
                     if (verboseLogging)
                     {
-                        Console.WriteLine(string.Format("{0}|{1} {2}", (int)ChangeType.LOG, e.changeType == (int)ChangeType.CREATED ? "[ADDED]" : e.changeType == (int)ChangeType.DELETED ? "[DELETED]" : "[CHANGED]", e.path));
+                        Console.WriteLine("{0}|{1} {2}", (int)ChangeType.LOG, e.changeType == (int)ChangeType.CREATED ? "[ADDED]" : e.changeType == (int)ChangeType.DELETED ? "[DELETED]" : "[CHANGED]", e.path);
                     }
                 }
             });
@@ -73,7 +73,7 @@ namespace VSCode.FileSystem
             {
                 if (e != null)
                 {
-                    Console.WriteLine(string.Format("{0}|{1}", (int)ChangeType.LOG, e.GetException().ToString()));
+                    Console.WriteLine("{0}|{1}", (int)ChangeType.LOG, e.GetException().ToString());
                 }
             };
 
