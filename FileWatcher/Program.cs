@@ -16,6 +16,8 @@ namespace VSCode.FileSystem
 
         static int Main(string[] args)
         {
+            // We want Unicode for the output
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             // Validate args length
             if (args.Length == 0 || args.Length > 2)
